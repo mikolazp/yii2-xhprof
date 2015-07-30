@@ -4,53 +4,31 @@ xhprof for yii2
 
 Installation
 ------------
+"repositories": [
+	{
+		"url": "https://github.com/mikolazp/yii2-xhprof.git",
+		"type": "git"
+	}
+],
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
-
-Either run
-
-```
-php composer.phar require fbi/yii2-xhprof "*"
-```
-
-for dev-master
-
-```
-php composer.phar require fbi/yii2-xhprof "dev-master"
-```
-
-or add
-
-```
-"fbi/yii2-xhprof": "*"
-```
-
-to the require section of your `composer.json` file.
+"require": {
+        "mikolazp/yii2-xhprof": "dev-master"
+    },
 
 
 Usage
 -----
 
-1. add the following code to your entry script,for example: index.php
-```php
-defined('YII_PROFILE') or define('YII_PROFILE',true);
-```
-
-2. then modify your application configuration as follows at the end of your config file:
+In file main-local.php
 
 ```php
-if (YII_PROFILE){
-	$config['bootstrap'][] = 'xhprof';
-	$config['modules']['xhprof'] = [
-		'class'=>'fbi\xhprof\Module',
-		'frequency'=>1000,//record rate
-		'minExcutionTime'=>1,//
-		//'name'=>'linkserver',//xhprof source,default value: Yii::$app->id
-		//'dir'=>'/tmp',//record path ,default value: @runtime/xhprof/
-	];
+
+if(YII_ENV == 'dev'){
+    $config['bootstrap'][] = 'xhprof';
+    $config['modules']['xhprof'] = [
+        'class'=>'fbi\xhprof\Module',
+    ];
 }
 ```
 
-3. then you browse the profs var http://your.site.name/xhprof
-
-[sanwkj@163.com](mailto:sanwkj@163.com?subject=yii2-xhprof)
+can find here: mysite.dev/xhprof
