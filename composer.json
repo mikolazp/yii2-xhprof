@@ -1,5 +1,5 @@
 {
-    "name": "fbi/yii2-xhprof",
+    "name": "mikolazp/yii2-xhprof",
     "description": "Yii2 provide support for xhprof",
     "keywords": ["PHP","Yii2","xhprof"],
     "homepage": "http://git.oschina.net/fbi/yii2-xhprof",
