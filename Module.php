@@ -48,10 +48,12 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         $this->name = is_null($this->name) ? \Yii::$app->id : $this->name;
         $this->name = preg_replace("/[^\w\.\-]/", '', $this->name);
-        $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-            xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
-            register_shutdown_function([$this, 'record']);
-        });
+        if(strpos(\Yii::$app->request->url, '/xhprof') === false && strpos(\Yii::$app->request->url, '/debug') === false) {
+            $app->on(Application::EVENT_BEFORE_REQUEST, function () {
+                xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
+                register_shutdown_function([$this, 'record']);
+            });
+        }
     }
 
     public function record()
